@@ -1,3 +1,5 @@
+using CabInvoiceGenerator;
+
 namespace CabGeneratorTest
 {
     public class CanInvoiceTest
