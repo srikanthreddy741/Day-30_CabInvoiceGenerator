@@ -6,30 +6,44 @@ using System.Threading.Tasks;
 
 namespace CabInvoiceGenerator
 {
-    public class InvoiceSummery : object
+    public class InvoiceSummary
     {
-        public int numberofRides;
-        public double totalFair;
-        public double average;
-        public InvoiceSummery(int numberofRides, double totalFair)
+        private int numberOfRides;
+        private double totalFare;
+        private double averageFare;
+        private string userId;
+        public InvoiceSummary(int numberOfRides, double totalFare)
         {
-            this.numberofRides = numberofRides;
-            this.totalFair = totalFair;
-            this.average = (totalFair / numberofRides);
+            this.numberOfRides = numberOfRides;
+            this.totalFare = totalFare;
+            this.averageFare = this.totalFare / this.numberOfRides;
+        }
+        public InvoiceSummary(int numberOfRides, double totalFare, double averageFare)
+        {
+            this.numberOfRides = numberOfRides;
+            this.totalFare = totalFare;
+            this.averageFare = this.totalFare / this.numberOfRides;
+        }
+        public InvoiceSummary(int numberOfRides, double totalFare, string userId)
+        {
+            this.numberOfRides = numberOfRides;
+            this.totalFare = totalFare;
+            this.userId = userId;
+            this.averageFare = this.totalFare / this.numberOfRides;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-            if (!(obj is InvoiceSummery))
-            {
-                return false;
-            }
-            InvoiceSummery imputedObject = (InvoiceSummery)obj;
-            return this.numberofRides == imputedObject.numberofRides && this.totalFair == imputedObject.totalFair && this.average == imputedObject.average;
+            if (obj == null) return false;
+            if (!(obj is InvoiceSummary)) return false;
+            InvoiceSummary inputObject = (InvoiceSummary)obj;
+            return this.numberOfRides == inputObject.numberOfRides && this.totalFare == inputObject.totalFare && this.averageFare == inputObject.averageFare;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.numberOfRides.GetHashCode() ^ this.totalFare.GetHashCode() ^ this.averageFare.GetHashCode();
         }
     }
+
 }
